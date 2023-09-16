@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import style from "../styles/Home.module.css";
 
 const ImageConverter: React.FC = () => {
   const [width, setWidth] = useState<number>(0);
@@ -18,7 +19,6 @@ const ImageConverter: React.FC = () => {
           setWidth(img.width);
           setHeight(img.height);
 
-          // Display the original image
           const originalImage = new Image();
           originalImage.src = e.target?.result as string;
           document.getElementById("original-image")!.innerHTML = "";
@@ -62,52 +62,58 @@ const ImageConverter: React.FC = () => {
   };
 
   return (
-    <div>
-      <h2 style={{ textAlign: "center" }}>Конвертор Картинок</h2>
-      <input
-        type="file"
-        accept="image/*"
-        ref={inputFileRef}
-        style={{ display: "none" }}
-        onChange={handleImageChange}
-      />
-      <button onClick={() => inputFileRef.current?.click()}>
-        Выберите изображение
-      </button>
-      <div>
-        <h3>Детали исходного изображения:</h3>
-        <p>Ширина: {width}px</p>
-        <p>Высота: {height}px</p>
+    <div className={style.imageConverter}>
+      <div className={style.imageSection}>
+        <h2>Исходное изображение</h2>
+        <input
+          type="file"
+          accept="image/*"
+          ref={inputFileRef}
+          style={{ display: "none" }}
+          onChange={handleImageChange}
+        />
+        <button
+          className={style.chooseButton}
+          onClick={() => inputFileRef.current?.click()}
+        >
+          Выберите изображение
+        </button>
         <div id="original-image"></div>
       </div>
-      <div>
-        <label>
-          Желаемая ширина:
-          <input
-            type="number"
-            value={desiredWidth}
-            onChange={(e) => setDesiredWidth(e.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Желаемая Height:
-          <input
-            type="number"
-            value={desiredHeight}
-            onChange={(e) => setDesiredHeight(e.target.value)}
-          />
-        </label>
-      </div>
-      <button onClick={handleResize}>Изменить размер изображения</button>
-      <div>
-        <h3>Измененное изображение::</h3>
+      <div className={style.imageSection}>
+        <h2>Измененное изображение</h2>
+        <div>
+          <label>
+            Желаемая Ширина:
+            <input
+              type="number"
+              value={desiredWidth}
+              onChange={(e) => setDesiredWidth(e.target.value)}
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            Желаемая Высота:
+            <input
+              type="number"
+              value={desiredHeight}
+              onChange={(e) => setDesiredHeight(e.target.value)}
+            />
+          </label>
+        </div>
+        <button className={style.resizeButton} onClick={handleResize}>
+          Изменить размер изображения
+        </button>
         <div id="resized-image"></div>
+        <button
+          className={style.downloadButton}
+          onClick={handleDownload}
+          disabled={width === 0 || height === 0}
+        >
+          Скачать измененное изображение
+        </button>
       </div>
-      <button onClick={handleDownload} disabled={width === 0 || height === 0}>
-        Скачать измененное изображение
-      </button>
     </div>
   );
 };

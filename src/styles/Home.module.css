@@ -1,0 +1,52 @@
+.chooseButton,
+.resizeButton,
+.downloadButton {
+  display: block;
+  width: 75%;
+  padding: 10px 20px;
+  margin-top: 10px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.imageConverter {
+  display: flex;
+  flex-direction: column;
+}
+
+.imageSection {
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.imageSection h2 {
+  margin-bottom: 10px;
+}
+
+.chooseButton:hover,
+.resizeButton:hover,
+.downloadButton:hover {
+  background-color: #2980b9;
+}
+
+.chooseButton:disabled,
+.downloadButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+@media (min-width: 768px) {
+  .imageConverter {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .imageSection {
+    width: 48%;
+  }
+}
